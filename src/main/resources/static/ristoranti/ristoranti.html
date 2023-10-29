@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elenco Ristoranti</title>
+    <script type="text/javascript" src="../javascript/validate.js"></script>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrizione</th>
+            <th>Ubicazione</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="ristoranteSelezionato" value="1" /></td>
+            <td>1</td>
+            <td>Ristorante/Pizzeria le Casette del Mac</td>
+            <td>Ristorante che offre una vasta varietà di pietanze</td>
+            <td>Cosenza</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="ristoranteSelezionato" value="2" /></td>
+            <td>2</td>
+            <td>Locanda degli Hernandez</td>
+            <td>Cucina tipica messicana. Possibilità di comporre a piacere il proprio tacos</td>
+            <td>Cosenza</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="ristoranteSelezionato" value="3" /></td>
+            <td>3</td>
+            <td>Le terrazze di Anna</td>
+            <td>Cucina locale ottima con prodotti di qualità</td>
+            <td>Rende</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="ristoranteSelezionato" value="4" /></td>
+            <td>4</td>
+            <td>Pizzeria il Giardinetto</td>
+            <td>Pizza napoletana di eccellenza, varie varietà di pizze e possibilità di mangiare la pizza fritta</td>
+            <td>Castrolibero</td>
+        </tr>
+    </table>
+    <input type="button" value="Cancella" onclick="rimuoviRistorante();" />
+    <div>
+        <h3>Aggiungi un nuovo ristorante</h3>
+        <form method="post" action="../addRistorante">
+            <label for="nome_rist">Nome Ristorante:</label>
+            <input id="nome_rist" type="text" name="nome_ristorante" />
+            <br/>
+            <br/>
+            <label for="desc_rist">Descrizione Ristorante:</label>
+            <textarea id="desc_rist" placeholder="Inserisci la descrizione" name="descrizione_ristorante"></textarea>
+            <br/>
+            <br/>
+            <label for="ub_rist">Ubicazione Ristorante:</label>
+            <select id="ub_rist" name="ubicazione_ristorante">
+                <option value="---" selected>---</option>
+                <option value="Cosenza">Cosenza</option>
+                <option value="Rende">Rende</option>
+                <option value="Castrolibero">Castrolibero</option>
+            </select>
+            <br/>
+            <br/>
+            <input type="button" value="Verifica Dati" onclick="verificaRistorante();" />
+            <input type="button" value="Aggiungi" onclick="aggiungiRistorante();" />
+            <input type="submit" />
+            <input type="reset" />
+        </form>
+    </div>
+    <br/>
+    <p><a href="/"><< Torna alla Home</a></p>
+</body>
+</html>
