@@ -17,15 +17,16 @@ header>img {
 header>div>img {
     margin-top: 30px;
     margin-bottom: 20px;
+    width: 40%;
     border-style: solid;
-    border-radius: 25%;
+    border-radius: 50%;
 }
 
 body {
     background-color: lightgray;
 }
 
-h1 {
+h1, h2 {
     text-shadow: 2px 2px white;
 }
 
@@ -46,6 +47,7 @@ article {
 
 article>figure>img {
     width: 60%;
+    border-style: solid;
 }
 
 nav li>a:link, nav li>a:visited {
@@ -53,19 +55,24 @@ nav li>a:link, nav li>a:visited {
     color: white;
 }
 
-nav li:hover {
+/*nav li:hover {
     background-color: black;
-}
+}*/
 
 footer {
     clear: left;
 }
 
 .row {
-    margin-top: 10px;
+    margin-top: 40px;
+    padding-left: 5px;
 }
 
-@media screen and (max-width: 300px) {
+.parag {
+    margin-left: 5px;
+}
+
+@media screen and (max-width: 800px) {
     nav li {
         display: block;
     }
