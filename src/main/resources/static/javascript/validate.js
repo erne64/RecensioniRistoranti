@@ -1,3 +1,5 @@
+daCancellare = new Array();
+daAggiungere = new Array();
 class Ristorante {
     constructor(nome, descrizione, ubicazione) {
         this.nome = nome;
@@ -93,6 +95,8 @@ function rimuoviRistorante(){
 
         var riga = document.querySelector("tr#r" + valueSel);
         riga.style = "text-decoration: line-through";
+
+        daCancellare.push(valueSel);
     });
 }
 
