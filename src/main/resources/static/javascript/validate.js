@@ -1,3 +1,31 @@
+class Ristorante {
+    constructor(nome, descrizione, ubicazione) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.ubicazione = ubicazione;
+    }
+    getNome() {
+        return this.nome;
+    }
+}
+
+window.addEventListener("load", function() {
+    var butRimuovi = document.querySelector("#btn_cancella");
+    butRimuovi.addEventListener("click", function () {
+        rimuoviRistorante();
+    });
+
+    var butVerifica = document.querySelector("#btn_verifica");
+    butVerifica.addEventListener("click", function () {
+        verificaRistorante();
+    });
+
+    var butAggiungi = document.querySelector("#btn_aggiungi");
+    butAggiungi.addEventListener("click", function () {
+        aggiungiRistorante();
+    });
+});
+
 function verificaRistorante(){
     var nomeRistTxt = document.getElementById("nome_rist");
     var descRistTxt = document.getElementById("desc_rist");
@@ -49,7 +77,7 @@ function aggiungiRistorante(){
 
         newTr.style = "font-weight: bold";
 
-        let tableElement = document.getElementsByTagName("table")[0];
+        let tableElement = document.getElementsByTagName("tbody")[0];
         tableElement.appendChild(newTr);
 
     } else {
