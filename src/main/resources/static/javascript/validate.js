@@ -1,5 +1,35 @@
-daCancellare = new Array();
-daAggiungere = new Array();
+ristorantiDaCancellare = new Array();
+ristorantiDaAggiungere = new Array();
+
+/*
+XML
+<ristorante>
+    <nome>
+        Gironi ristopasti
+    </nome>
+    <descrizione>
+        Pizze
+    </descrizione>
+    <ubicazione>
+        Cosenza
+    </ubicazione>
+</ristorante>
+*/
+/*
+  [
+   {
+        "nome": "Gironi ristopasti",
+        "descrizione": "Pizze",
+        "ubicazione": "Cosenza"
+   },
+   {
+        "nome": "Gironi ristopasti secondi",
+        "descrizione": "Pizze Gourmet",
+        "ubicazione": "Rende"
+   }
+   ]
+ */
+
 class Ristorante {
     constructor(nome, descrizione, ubicazione) {
         this.nome = nome;
@@ -25,6 +55,11 @@ window.addEventListener("load", function() {
     var butAggiungi = document.querySelector("#btn_aggiungi");
     butAggiungi.addEventListener("click", function () {
         aggiungiRistorante();
+    });
+
+    var butSalva = document.querySelector("#btn_salva");
+    butSalva.addEventListener("click", function () {
+        salva();
     });
 });
 
@@ -55,6 +90,9 @@ function aggiungiRistorante(){
     var ubRist = ubRistElement.value.trim();
 
     if (validateRistorante(nomeRist, descRist, ubRist)) {
+        nuovoRistorante = new Ristorante(nomeRist, descRist, ubRist);
+        ristorantiDaAggiungere.push(nuovoRistorante);
+
         let newTr = document.createElement("tr");
 
         let newTdChk = document.createElement("td");
@@ -66,6 +104,9 @@ function aggiungiRistorante(){
         let contentNome = document.createTextNode(nomeRist);
         let contentDescrizione = document.createTextNode(descRist);
         let contentUbicazione = document.createTextNode(ubRist);
+
+        nuovoRistorante = new Ristorante(contentNome, contentDescrizione, contentUbicazione);
+        ristorantiDaAggiungere.push(nuovoRistorante);
 
         newTr.appendChild(newTdChk);
         newTr.appendChild(newTdId);
@@ -96,7 +137,27 @@ function rimuoviRistorante(){
         var riga = document.querySelector("tr#r" + valueSel);
         riga.style = "text-decoration: line-through";
 
-        daCancellare.push(valueSel);
+        ristorantiDaCancellare.push(valueSel);
+    });
+}
+
+function salva() {
+    var ristJson= JSON.stringify(ristorantiDaAggiungere);
+    $.ajax({
+        url: "addRistorante",
+        type: "POST",
+        data: ristJson,
+        contentType: "application/json",
+        success: function (risposta) {
+            //alert(risposta)
+            if (risposta == "OK") {
+                alert("SI");
+                let tutteLeRighe = document.querySelectorAll("tr");
+                tutteLeRighe.forEach(function (riga) {
+                    riga.style.removeProperty("font-weight");
+                });
+            }
+        }
     });
 }
 

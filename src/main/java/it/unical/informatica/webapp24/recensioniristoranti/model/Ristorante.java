@@ -5,6 +5,8 @@ public class Ristorante {
     String descrizione;
     String ubicazione;
 
+    public Ristorante() {}
+
     public Ristorante(String nome, String descrizione, String ubicazione) {
         this.nome = nome;
         this.descrizione = descrizione;
@@ -34,4 +36,11 @@ public class Ristorante {
     public String getUbicazione() {
         return ubicazione;
     }
+
+    public static void main(String[] args) {
+        Ristorante r1 = new Ristorante("Nome", "Si mangia pizza", "Cosenza");
+        r1.setNome("Girone dei golosi");
+    }
 }
+
+
