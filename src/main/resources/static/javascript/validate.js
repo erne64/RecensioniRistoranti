@@ -105,9 +105,6 @@ function aggiungiRistorante(){
         let contentDescrizione = document.createTextNode(descRist);
         let contentUbicazione = document.createTextNode(ubRist);
 
-        nuovoRistorante = new Ristorante(contentNome, contentDescrizione, contentUbicazione);
-        ristorantiDaAggiungere.push(nuovoRistorante);
-
         newTr.appendChild(newTdChk);
         newTr.appendChild(newTdId);
         newTr.appendChild(newTdNome);
@@ -143,6 +140,7 @@ function rimuoviRistorante(){
 
 function salva() {
     var ristJson= JSON.stringify(ristorantiDaAggiungere);
+    console.log(ristJson);
     $.ajax({
         url: "addRistorante",
         type: "POST",
@@ -151,7 +149,7 @@ function salva() {
         success: function (risposta) {
             //alert(risposta)
             if (risposta == "OK") {
-                alert("SI");
+                //alert("SI");
                 let tutteLeRighe = document.querySelectorAll("tr");
                 tutteLeRighe.forEach(function (riga) {
                     riga.style.removeProperty("font-weight");

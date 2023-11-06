@@ -14,6 +14,7 @@ public class ServiziRest {
     public String hello() {
         return "Hello";
     }
+
     @PostMapping("/ristoranti/addRistorante")
     public String aggiungiRistorante(@RequestBody ArrayList<Ristorante> ristoranti) {
         // Salva ristoranti nel DB
@@ -29,4 +30,5 @@ public class ServiziRest {
         // Altrimenti
         // return "Errore: ...";
     }
+
 }
