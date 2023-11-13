@@ -3,7 +3,6 @@ package it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.post
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.PiattoDao;
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.model.Piatto;
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.model.Ristorante;
-import it.unical.informatica.webapp24.recensioniristoranti.persistenza.model.Utente;
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.DBManager;
 
 import java.sql.*;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PiattoDaoPostgres implements PiattoDao {
+
     Connection connection;
 
     public PiattoDaoPostgres(Connection connection) {
@@ -58,10 +58,9 @@ public class PiattoDaoPostgres implements PiattoDao {
                     piatto.setNome(rs.getString("p_nome"));
                     piatto.setPrezzo(rs.getDouble("p_prezzo"));
                 }
-                Long ristId = rs.getLong("r_id");
+                Integer ristId = rs.getInt("r_id");
                 Ristorante r = DBManager.getInstance().getRistoranteDao().findByPrimaryKey(ristId);
                 piatto.addRistorante(r);
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
