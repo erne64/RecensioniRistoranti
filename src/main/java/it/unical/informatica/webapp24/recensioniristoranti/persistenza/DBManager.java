@@ -6,6 +6,8 @@ import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.Recen
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.RistoranteDao;
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.postgres.PiattoDaoPostgres;
 import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.postgres.RecensioneDaoPostgres;
+import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.postgres.RistoranteDaoPostgres;
+import it.unical.informatica.webapp24.recensioniristoranti.persistenza.dao.postgres.UtenteDaoPostgres;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +31,7 @@ public class DBManager {
     public Connection getConnection() {
         if (con == null) {
             try {
-                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/webapp24_ristoranti", "postgres", "postgres");
+                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/webapp24_ristoranti", "postgres", "2003");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -42,11 +44,11 @@ public class DBManager {
     }
 
     public UtenteDao getUtenteDao() {
-        return null;
+        return new UtenteDaoPostgres(getConnection());
     }
 
     public RistoranteDao getRistoranteDao() {
-        return null;
+        return new RistoranteDaoPostgres(getConnection());
     }
 
     public RecensioneDao getRecensioneDao() {
