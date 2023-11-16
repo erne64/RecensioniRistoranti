@@ -7,8 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class UtenteDaoPostgres implements UtenteDao {
     Connection conn;
 
@@ -98,7 +96,8 @@ public class UtenteDaoPostgres implements UtenteDao {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }else {
+
+        } else {
             String updateStr = "UPDATE utente set password = ?, "
                     + "nome = ?, "
                     + "cognome = ?, "
@@ -126,7 +125,6 @@ public class UtenteDaoPostgres implements UtenteDao {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
         }
     }
 

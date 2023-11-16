@@ -66,8 +66,6 @@ public class RistoranteDaoPostgres implements RistoranteDao {
         return ristorante;
     }
 
-
-
     @Override
     public void saveOrUpdate(Ristorante ristorante) {
         if (ristorante.getId() == null) {
@@ -91,7 +89,8 @@ public class RistoranteDaoPostgres implements RistoranteDao {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }else {
+
+        } else {
             String updateStr = "UPDATE ristorante set nome = ?, descrizione = ?, cap_ubicazione = ? where id = ?";
 
             PreparedStatement st;
@@ -103,8 +102,6 @@ public class RistoranteDaoPostgres implements RistoranteDao {
                 st.setString(3, ristorante.getUbicazione());
 
                 st.setLong(4, ristorante.getId());
-
-
 
                 st.executeUpdate();
 

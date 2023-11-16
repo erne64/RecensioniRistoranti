@@ -5,7 +5,6 @@ import it.unical.informatica.webapp24.recensioniristoranti.persistenza.model.Ris
 import java.util.List;
 
 public interface RistoranteDao {
-
     public List<Ristorante> findAll();
 
     public Ristorante findByPrimaryKey(Integer id);

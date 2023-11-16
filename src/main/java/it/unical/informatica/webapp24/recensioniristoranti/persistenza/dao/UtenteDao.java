@@ -5,7 +5,6 @@ import it.unical.informatica.webapp24.recensioniristoranti.persistenza.model.Ute
 import java.util.List;
 
 public interface UtenteDao {
-
     public List<Utente> findAll();
 
     public Utente findByPrimaryKey(String username);

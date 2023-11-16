@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PiattoDaoPostgres implements PiattoDao {
-
     Connection connection;
 
     public PiattoDaoPostgres(Connection connection) {
@@ -26,9 +25,9 @@ public class PiattoDaoPostgres implements PiattoDao {
         try {
             Statement st = connection.createStatement();
             String query = "select * from piatto";
-
             ResultSet rs = st.executeQuery(query);
-            while (rs.next()){
+
+            while (rs.next()) {
                 Piatto piatto = findByPrimaryKey(rs.getLong("id"));
                 piattiLista.add(piatto);
             }
@@ -44,9 +43,9 @@ public class PiattoDaoPostgres implements PiattoDao {
         try {
             Statement st = connection.createStatement();
             String query = "select * from piatto";
-
             ResultSet rs = st.executeQuery(query);
-            while (rs.next()){
+
+            while (rs.next()) {
                 Piatto piatto = new PiattoProxy(connection);
                 piatto.setId(rs.getLong("id"));
                 piatto.setNome(rs.getString("nome"));
@@ -66,8 +65,7 @@ public class PiattoDaoPostgres implements PiattoDao {
         try {
             Statement st = connection.createStatement();
             //String query = "select * from piatto";
-            HashMap<Piatto, ArrayList<Ristorante>> piatti =
-                    new HashMap<Piatto, ArrayList<Ristorante>>();
+            HashMap<Piatto, ArrayList<Ristorante>> piatti = new HashMap<Piatto, ArrayList<Ristorante>>();
 
             String query = "select p.id as p_id, p.nome as p_nome, " +
                     "p.prezzo as p_prezzo, r.id as r_id  from " +
@@ -76,8 +74,10 @@ public class PiattoDaoPostgres implements PiattoDao {
                     "   s.piatto = p.id and s.ristorante = r.id";
 
             ResultSet rs = st.executeQuery(query);
+
             while (rs.next()) {
                 Long idPiatto = rs.getLong("p_id");
+
                 Piatto piatto = new Piatto();
                 piatto.setId(idPiatto);
                 piatto.setNome(rs.getString("p_nome"));
@@ -119,6 +119,7 @@ public class PiattoDaoPostgres implements PiattoDao {
             PreparedStatement st = connection.prepareStatement(query);
             st.setLong(1, id);
             ResultSet rs = st.executeQuery();
+
             while (rs.next()) {
                 if (piatto == null) {
                     piatto = new Piatto();
@@ -126,10 +127,12 @@ public class PiattoDaoPostgres implements PiattoDao {
                     piatto.setNome(rs.getString("p_nome"));
                     piatto.setPrezzo(rs.getDouble("p_prezzo"));
                 }
+
                 Integer ristId = rs.getInt("r_id");
                 Ristorante r = DBManager.getInstance().getRistoranteDao().findByPrimaryKey(ristId);
                 piatto.addRistorante(r);
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -140,7 +143,6 @@ public class PiattoDaoPostgres implements PiattoDao {
     public void saveOrUpdate(Piatto piatto) {
         if (piatto.getId() == null) {
             String insertStr = "INSERT INTO piatto VALUES (?, ?, ?)";
-
             try {
                 PreparedStatement st = connection.prepareStatement(insertStr);
 
@@ -168,13 +170,13 @@ public class PiattoDaoPostgres implements PiattoDao {
 
                     stServe.executeUpdate();
                 }
+
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }else {
-            String updateStr = "UPDATE piatto set nome = ?, prezzo = ? "
-                    + "where id = ?";
+        } else {
+            String updateStr = "UPDATE piatto set nome = ?, prezzo = ? " + "where id = ?";
 
             PreparedStatement st;
             try {
@@ -198,14 +200,14 @@ public class PiattoDaoPostgres implements PiattoDao {
                     ResultSet rsCheck = stCheckServe.executeQuery();
                     PreparedStatement stServe;
                     if (rsCheck.next()) {
-                        String serveStr = "UPDATE serve SET piatto = ?, ristorante = ? "
-                                + "WHERE id = ?";
+                        String serveStr = "UPDATE serve SET piatto = ?, ristorante = ? " + "WHERE id = ?";
                         stServe = connection.prepareStatement(serveStr);
 
                         stServe.setLong(1, piatto.getId());
                         stServe.setLong(2, r.getId());
                         stServe.setLong(3, rsCheck.getLong("id"));
-                    }else {
+
+                    } else {
                         String serveStr = "INSERT INTO serve VALUES (?, ?, ?)";
 
                         stServe = connection.prepareStatement(serveStr);
@@ -219,8 +221,6 @@ public class PiattoDaoPostgres implements PiattoDao {
 
                     stServe.executeUpdate();
                 }
-
-
 
             } catch (SQLException e) {
                 // TODO Auto-generated catch block

@@ -37,7 +37,6 @@ public class PiattoProxy extends Piatto {
                 r.setDescrizione(rs.getString("descrizione"));
                 rists.add(r);
 
-
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

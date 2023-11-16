@@ -5,7 +5,6 @@ import it.unical.informatica.webapp24.recensioniristoranti.persistenza.model.Rec
 import java.util.List;
 
 public interface RecensioneDao {
-
     public List<Recensione> findAll();
 
     public Recensione findByPrimaryKey(Long id);

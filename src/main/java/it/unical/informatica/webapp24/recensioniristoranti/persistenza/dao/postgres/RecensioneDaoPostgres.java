@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RecensioneDaoPostgres implements RecensioneDao {
-
     Connection connection;
 
     public RecensioneDaoPostgres(Connection connection) {
@@ -48,12 +47,10 @@ public class RecensioneDaoPostgres implements RecensioneDao {
                 Integer ristId = rs.getInt("ristorante");
                 Ristorante ristorante = DBManager.getInstance().getRistoranteDao().findByPrimaryKey(ristId);
                 rec.setRistorante(ristorante);
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return rec;
     }
 
