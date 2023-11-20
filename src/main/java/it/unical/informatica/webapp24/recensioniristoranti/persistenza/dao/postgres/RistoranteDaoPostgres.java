@@ -30,7 +30,7 @@ public class RistoranteDaoPostgres implements RistoranteDao {
                 ristorante.setId(rs.getLong("id"));
                 ristorante.setNome(rs.getString("nome"));
                 ristorante.setDescrizione(rs.getString("descrizione"));
-                ristorante.setUbicazione(rs.getString("cap_ubicazione"));
+                ristorante.setUbicazione(rs.getString("ubicazione"));
                 ristoranti.add(ristorante);
             }
 
@@ -80,8 +80,8 @@ public class RistoranteDaoPostgres implements RistoranteDao {
 
                 st.setLong(1, newId);
                 st.setString(2, ristorante.getNome());
-                st.setString(3, ristorante.getUbicazione());
-                st.setString(4, ristorante.getDescrizione());
+                st.setString(3, ristorante.getDescrizione());
+                st.setString(4, ristorante.getUbicazione());
 
                 st.executeUpdate();
 
@@ -91,7 +91,7 @@ public class RistoranteDaoPostgres implements RistoranteDao {
             }
 
         } else {
-            String updateStr = "UPDATE ristorante set nome = ?, descrizione = ?, cap_ubicazione = ? where id = ?";
+            String updateStr = "UPDATE ristorante set nome = ?, descrizione = ?, ubicazione = ? where id = ?";
 
             PreparedStatement st;
             try {
